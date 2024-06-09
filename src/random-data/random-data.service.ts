@@ -10,7 +10,6 @@ export class RandomDataService {
   }
 
   async randomNumber(data: any) {
-    this.logger.log(data.number);
     const parsedData = JSON.parse(data.number);
     const potenciaP = parsedData['Potencia P'];
     const reactivaQ = parsedData['Reactiva Q'];
