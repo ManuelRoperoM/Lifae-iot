@@ -1,10 +1,10 @@
-import { Module,Get } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { RandomDataController } from './random-data.controller';
 import { RandomDataService } from './random-data.service';
-import { get } from 'http';
+import { DataGateway } from './data.gateway';
 
 @Module({
   controllers: [RandomDataController],
-  providers: [RandomDataService]
+  providers: [RandomDataService, DataGateway],
 })
 export class RandomDataModule {}
