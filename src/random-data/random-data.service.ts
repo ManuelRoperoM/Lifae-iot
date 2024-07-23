@@ -13,11 +13,14 @@ export class RandomDataService {
     const parsedData = JSON.parse(data.number);
     const potenciaP = parsedData['Potencia P'];
     const reactivaQ = parsedData['Reactiva Q'];
+    const aparenteS = Math.sqrt(
+      Math.pow(potenciaP, 2) + Math.pow(reactivaQ, 2),
+    );
     const dataSend = {
       potenciaP: potenciaP,
       reactivaQ: reactivaQ,
-      aparenteS: Math.sqrt(Math.pow(potenciaP, 2) + Math.pow(reactivaQ, 2)),
-      factorPotencia: reactivaQ != 0 ? potenciaP / reactivaQ : 1,
+      aparenteS: aparenteS,
+      factorPotencia: aparenteS != 0 ? potenciaP / aparenteS : 1,
     };
     this.logger.log('dataSend:', dataSend);
     this.dataGateway.handleNewData(dataSend);
