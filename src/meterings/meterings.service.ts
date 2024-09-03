@@ -22,11 +22,19 @@ export class MeteringsService {
     const aparenteS = Math.sqrt(
       Math.pow(potenciaP, 2) + Math.pow(reactivaQ, 2),
     );
+
+    // Limitar los decimales a tres cifras
+    const formattedPotenciaP = parseFloat(potenciaP.toFixed(3));
+    const formattedReactivaQ = parseFloat(reactivaQ.toFixed(3));
+    const formattedAparenteS = parseFloat(aparenteS.toFixed(3));
+    const formattedFactorPotencia =
+      aparenteS !== 0 ? parseFloat((potenciaP / aparenteS).toFixed(3)) : 1;
+
     const dataSend = {
-      potenciaP: potenciaP,
-      reactivaQ: reactivaQ,
-      aparenteS: aparenteS,
-      factorPotencia: aparenteS != 0 ? potenciaP / aparenteS : 1,
+      potenciaP: formattedPotenciaP,
+      reactivaQ: formattedReactivaQ,
+      aparenteS: formattedAparenteS,
+      factorPotencia: formattedFactorPotencia,
     };
     this.logger.log('dataSend:', dataSend);
     this.dataGateway.handleNewData(dataSend);
